@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+svg {
+    width: 100vw;
+    height: 100vh;
+}
+
+rect {
+    fill: rgba(255, 255, 255, 0.03);
+}
+
+text {
+    fill: white;
+    font-family: 'Oswald',Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 455;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.floating-letter {
+    font-size: 48px;
+    fill: white;
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+}
+
+.input-container {
+    position: fixed;
+    bottom: 20px;
+}
+
+input {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 12px;
+    color: rgb(203, 203, 203);
+    font-size: 16px;
+    border-radius: 4px;
+    
+}
+
+input:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.4);
+}
