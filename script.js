@@ -1,6 +1,6 @@
 // Configuration object
 const config = {
-    letters: ['H', 'e', 'l', 'l', 'o'],
+    letters: ['F', 'l', 'o', 'a', 't'],
     boxWidth: 300,
     boxHeight: 300,
     spacing: 300,  // Space between box start positions
