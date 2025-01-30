@@ -1,10 +1,13 @@
+// Get the computed font size from CSS
+const letterFontSize = 40; // matches .floating-letter font-size from CSS
+
 // Configuration object
 const config = {
     letters: ['F', 'l', 'o', 'a', 't'],
-    boxWidth: 300,
-    boxHeight: 300,
-    spacing: 300,  // Space between box start positions
-    letterSpacing: 30,  // Adjust this value to control space between letter and line
+    boxWidth: letterFontSize * 4,    // 4x the font size
+    boxHeight: letterFontSize * 4,   // 4x the font size
+    spacing: letterFontSize * 4,     // Make spacing equal to box size for no padding
+    letterSpacing: 30,
     minDistance: 80,
     maxMovement: 50
 };
@@ -75,7 +78,7 @@ function generateSVGElements() {
             svg.innerHTML += `
                 <line id="connectingLine${i}" 
                       x1="0" y1="0" x2="0" y2="0" 
-                      stroke="rgba(255,255,255,0.2)"
+                      stroke="rgb(104, 104, 104)"
                       stroke-width="3"/>
             `;
         }
@@ -202,5 +205,54 @@ document.getElementById('letterInput').addEventListener('input', (e) => {
 
 // Set initial input value
 document.getElementById('letterInput').value = config.letters.join('');
+
+// Add font size control handlers
+document.getElementById('decreaseSize').addEventListener('click', () => {
+    const input = document.getElementById('fontSizeInput');
+    const newSize = Math.max(parseInt(input.value) - 10, parseInt(input.min));
+    updateFontSize(newSize);
+});
+
+document.getElementById('increaseSize').addEventListener('click', () => {
+    const input = document.getElementById('fontSizeInput');
+    const newSize = Math.min(parseInt(input.value) + 10, parseInt(input.max));
+    updateFontSize(newSize);
+});
+
+// Allow keyboard arrow controls
+document.getElementById('fontSizeInput').addEventListener('keydown', (e) => {
+    const input = e.target;
+    if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const newSize = Math.min(parseInt(input.value) + 10, parseInt(input.max));
+        updateFontSize(newSize);
+    } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const newSize = Math.max(parseInt(input.value) - 10, parseInt(input.min));
+        updateFontSize(newSize);
+    }
+});
+
+function updateFontSize(newSize) {
+    const input = document.getElementById('fontSizeInput');
+    input.value = newSize;
+    
+    // Update CSS variable
+    document.documentElement.style.setProperty('--letter-font-size', `${newSize}px`);
+    
+    // Update config
+    const letterFontSize = newSize;
+    config.boxWidth = letterFontSize * 4;
+    config.boxHeight = letterFontSize * 4;
+    config.spacing = letterFontSize * 4;
+    
+    // Stop all current animations
+    elements.letters.forEach(letter => {
+        gsap.killTweensOf(letter);
+    });
+    
+    // Reinitialize with new size
+    init();
+}
 
 init();

@@ -1,3 +1,7 @@
+:root {
+    --letter-font-size: 40px; /* Default font size */
+}
+
 body {
     margin: 0;
     background: black;
@@ -17,25 +21,28 @@ rect {
     fill: rgba(255, 255, 255, 0.03);
 }
 
-text {
+/* text {
     fill: white;
     font-family: 'Oswald',Arial, sans-serif;
-    font-size: 48px;
+    font-size: var(--letter-font-size);
     font-weight: 455;
     text-anchor: middle;
     dominant-baseline: middle;
-}
+} */
 
 .floating-letter {
-    font-size: 48px;
+    font-size: var(--letter-font-size);
     fill: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Oswald', Arial, sans-serif;
+    font-weight: 800;
     pointer-events: none;
 }
 
 .input-container {
     position: fixed;
     bottom: 20px;
+    display: flex;
+    gap: 10px;
 }
 
 input {
@@ -51,4 +58,52 @@ input {
 input:focus {
     outline: none;
     border-color: rgba(255,255,255,0.4);
+}
+
+/* Hide spin buttons for number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.size-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgb(203, 203, 203);
+    width: 32px;
+    height: 42px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.size-btn:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.size-btn:active {
+    background: rgba(255,255,255,0.2);
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px;
+    color: rgb(203, 203, 203);
+    font-size: 16px;
+    border-radius: 4px;
+    width: 50px;
+    text-align: center;
 }
